@@ -5,7 +5,9 @@ import jwt from "jsonwebtoken"
 
 const prisma = new PrismaClient();
 
-class authRegisterUser {
+class authServiceUser {
+    
+  
     async registerUser(email: string, password: string) {
         const hashedPassword = await bcrypt.hash(password, 10)
         return prisma.user.create({
@@ -34,5 +36,5 @@ class authRegisterUser {
 
 }
 
-export default authRegisterUser
+export default authServiceUser
 
