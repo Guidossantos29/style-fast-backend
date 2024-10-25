@@ -2,6 +2,7 @@ import  Express  from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { Prisma, PrismaClient } from "@prisma/client";
+import { setupSwagger } from "./config/swagger";
 
 
 dotenv.config();
@@ -10,6 +11,8 @@ const prisma = new PrismaClient();
 const PORT = process.env.PORT
 
 app.use(cors());
+
+setupSwagger(app);
 
 app.listen(PORT,() => {
     console.log("server online local");
