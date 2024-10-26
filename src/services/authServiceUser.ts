@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-import { error } from "console";
 import jwt from "jsonwebtoken"
 
 const prisma = new PrismaClient();
@@ -28,6 +27,8 @@ class authServiceUser {
          const token = jwt.sign({userId: user.id}, process.env.JWT_SECRET as string,{
             expiresIn:"1h"
          })
+
+         return {token};
     }
 
 
