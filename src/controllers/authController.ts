@@ -28,7 +28,7 @@ class AuthController {
         const serviceAuth = new authServiceUser();
         try {
             const { token } = await serviceAuth.loginUser(email, password);
-            res.json(200).json({ token });
+            res.status(200).json({ token });
 
         } catch(error){
             if(error instanceof Error){
