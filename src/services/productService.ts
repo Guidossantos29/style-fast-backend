@@ -1,6 +1,3 @@
-
-import { error } from 'console'
-import { Product } from './../../node_modules/.prisma/client/index.d';
 import { PrismaClient, Prisma } from "@prisma/client";
 
 interface ProductData {
@@ -52,6 +49,8 @@ class ProductService {
     async getProductById(id: number) {
         try {
             const product = await this.prisma.product.findUnique({ where: { id } })
+            if (!product) throw new Error("Product not found");
+            return product;
         } catch (error) {
             console.error("Error fetching product by ID:", error);
             throw new Error("Failed to fetch product by ID");
@@ -79,12 +78,19 @@ class ProductService {
 
     async deleteProduct(id: number) {
         try {
-            return await this.prisma.product.delete({ where: { id } })
+            const deletedProduct = await this.prisma.product.delete({ where: { id } });
+            return deletedProduct;
         } catch (error) {
-            console.error("Error deleting product:", error);
+            if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+
+                console.error("Error deleting product: Product not found");
+                throw new Error("Product not found");
+            }
+            console.error("Unexpected error deleting product:", error);
             throw new Error("Failed to delete product");
         }
     }
+
 }
 
 export default ProductService;

@@ -8,7 +8,7 @@ const router = express.Router();
  * @swagger
  * /auth/register:
  *   post:
- *     summary: Cria um novo usuário
+ *     summary: Create a new user
  *     tags: [Auth]
  *     requestBody:
  *       required: true
@@ -33,7 +33,7 @@ router.post("/register", (req, res) => authController.register(req, res));
  * @swagger
  * /auth/login:
  *   post:
- *     summary: Realiza o login do usuário
+ *     summary: Logs in the user
  *     tags: [Auth]
  *     requestBody:
  *       required: true

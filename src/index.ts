@@ -4,6 +4,7 @@ import cors from "cors";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { setupSwagger } from "./config/swagger";
 import authRoutes from './routes/authRoutes';
+import productRoutes from './routes/productRoutes'; 
 
 
 dotenv.config();
@@ -21,6 +22,8 @@ setupSwagger(app);
 app.use(Express.json());
 
 app.use('/auth', authRoutes);
+app.use('/products', productRoutes);
+
 
 app.listen(PORT,() => {
     console.log(`Server online at http://localhost:${PORT}`);
