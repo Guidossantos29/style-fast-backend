@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,29 +8,67 @@ datasource db {
 }
 
 model User {
-  id  Int @id @default(autoincrement())
-  email String @unique 
-  password String 
-  role String @default("USER")
-
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  password  String
+  role      String    @default("USER")
+  cart      Cart?
+  orders    Order[]
 }
 
-
 model Product {
-  id          Int      @id @default(autoincrement())
+  id          Int         @id @default(autoincrement())
   name        String
   description String
   price       Float
-  CreatedAt   DateTime @default(now())
-  updateAt    DateTime @updatedAt
-  images      Image[]  @relation("ProductImages")
+  stock       Int
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  cartItems   CartItem[]
+  orderItems  OrderItem[]
+  images      Image[]     @relation("ProductImages")
+}
+
+model Cart {
+  id        Int        @id @default(autoincrement())
+  userId    Int        @unique
+  user      User       @relation(fields: [userId], references: [id])
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+}
+
+model CartItem {
+  id        Int       @id @default(autoincrement())
+  cartId    Int
+  productId Int
+  quantity  Int
+  cart      Cart      @relation(fields: [cartId], references: [id])
+  product   Product   @relation(fields: [productId], references: [id])
+}
+
+model Order {
+  id        Int         @id @default(autoincrement())
+  userId    Int
+  user      User        @relation(fields: [userId], references: [id])
+  items     OrderItem[]
+  total     Float
+  status    String      
+  createdAt DateTime    @default(now())
+}
+
+model OrderItem {
+  id        Int       @id @default(autoincrement())
+  orderId   Int
+  productId Int
+  quantity  Int
+  price     Float
+  order     Order     @relation(fields: [orderId], references: [id])
+  product   Product   @relation(fields: [productId], references: [id])
 }
 
 model Image {
-  id Int @id @default(autoincrement())
-  url String
-  product Product @relation("ProductImages",fields: [productId],references: [id],onDelete: Cascade)
+  id        Int      @id @default(autoincrement())
+  url       String
+  product   Product  @relation("ProductImages", fields: [productId], references: [id], onDelete: Cascade)
   productId Int
-
 }
-
