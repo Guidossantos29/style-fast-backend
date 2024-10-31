@@ -47,8 +47,8 @@ class CartService {
             },
         });
 
-        if(!cart){
-            return {message: "Empty cart"}
+        if (!cart) {
+            return { message: "Empty cart" }
         }
         return cart;
 
