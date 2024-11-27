@@ -1,5 +1,3 @@
-import { error } from 'console';
-
 import { Request, Response } from "express";
 import authServiceUser from '../services/authServiceUser';
 

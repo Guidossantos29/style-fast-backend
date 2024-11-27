@@ -1,10 +1,7 @@
-import express from 'express';
+import { Request } from 'express';
 
-declare module 'express' {
-  export interface Request {
-    user?: {
-      id: number;
-      
-    };
-  }
+interface CustomRequest extends Request {
+  userId?: number;
 }
+
+export default CustomRequest;

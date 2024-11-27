@@ -1,12 +1,12 @@
-import { Product } from './../../node_modules/.prisma/client/index.d';
 import { Request, Response } from 'express';
 import ProductService from '../services/productService';
-import { error } from 'console';
+
 
 interface ProductData {
     name: string;
     description: string;
     price: number;
+    stock: number;
     images?: { url: string }[];
 }
 

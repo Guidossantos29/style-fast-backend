@@ -5,6 +5,7 @@ import { Prisma, PrismaClient } from "@prisma/client";
 import { setupSwagger } from "./config/swagger";
 import authRoutes from './routes/authRoutes';
 import productRoutes from './routes/productRoutes'; 
+import cartRoutes from "./routes/cartRoutes";
 
 
 dotenv.config();
@@ -23,6 +24,7 @@ app.use(Express.json());
 
 app.use('/auth', authRoutes);
 app.use('/products', productRoutes);
+app.use('/cart',cartRoutes)
 
 
 app.listen(PORT,() => {

@@ -1,14 +1,9 @@
-import { error } from 'console';
-
-
-
 import express from 'express';
 import ProductController from '../controllers/productController';
+import { authenticate } from '../middleware/authMiddleware';
 
 const productController = new ProductController();
 const router = express.Router();
-
-
 
 /**
  * @swagger
@@ -49,7 +44,7 @@ const router = express.Router();
  *       400:
  *         description: Dados inválidos
  */
-router.post('/', async (req, res) => {
+router.post('/', authenticate, async (req, res) => {
     try {
         await productController.create(req, res);
     } catch (error) {
@@ -69,7 +64,7 @@ router.post('/', async (req, res) => {
  *       404:
  *         description: Nenhum produto encontrado
  */
-router.get('/', (req, res) => productController.getAll(req, res));
+router.get('/', authenticate, (req, res) => productController.getAll(req, res));
 
 /**
  * @swagger
@@ -90,7 +85,7 @@ router.get('/', (req, res) => productController.getAll(req, res));
  *       404:
  *         description: Produto não encontrado
  */
-router.get('/:id', (req, res) => productController.getById(req, res));
+router.get('/:id', authenticate, (req, res) => productController.getById(req, res));
 
 /**
  * @swagger
@@ -133,7 +128,7 @@ router.get('/:id', (req, res) => productController.getById(req, res));
  *       404:
  *         description: Produto não encontrado
  */
-router.put('/:id', (req, res) => productController.update(req, res));
+router.put('/:id', authenticate, (req, res) => productController.update(req, res));
 
 /**
  * @swagger
@@ -154,17 +149,14 @@ router.put('/:id', (req, res) => productController.update(req, res));
  *       404:
  *         description: Produto não encontrado
  */
-router.delete('/:id',async (req,res) => {
-    try{
-        await productController.delete(req,res);
-    } catch(error){
-        if(error instanceof Error){
-            res.status(500).json({error: error.message})
+router.delete('/:id', authenticate, async (req, res) => {
+    try {
+        await productController.delete(req, res);
+    } catch (error) {
+        if (error instanceof Error) {
+            res.status(500).json({ error: error.message });
         }
     }
 });
 
 export default router;
-
-
-

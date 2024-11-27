@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken"
 
 const prisma = new PrismaClient();
 
-class authServiceUser {
+class AuthServiceUser {
     
   
     async registerUser(email: string, password: string) {
@@ -37,5 +37,5 @@ class authServiceUser {
 
 }
 
-export default authServiceUser
+export default AuthServiceUser
 
