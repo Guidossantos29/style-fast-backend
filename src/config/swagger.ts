@@ -15,8 +15,18 @@ const swaggerOptions = {
         url: 'http://localhost:3000', 
       },
     ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
+    security: [{ bearerAuth: [] }], // Aplica segurança em todas as rotas por padrão
   },
-  apis: ['./src/routes/*.ts'], 
+  apis: ['./src/routes/*.ts'], // Certifique-se de que o caminho para os arquivos de rotas está correto
 };
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
