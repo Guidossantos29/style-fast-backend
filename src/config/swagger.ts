@@ -12,7 +12,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:3000', 
+        url: 'http://localhost:3000',
       },
     ],
     components: {
@@ -21,13 +21,15 @@ const swaggerOptions = {
           type: 'http',
           scheme: 'bearer',
           bearerFormat: 'JWT',
+          description: 'Insira o token JWT gerado após o login.',
         },
       },
     },
-    security: [{ bearerAuth: [] }], // Aplica segurança em todas as rotas por padrão
   },
-  apis: ['./src/routes/*.ts'], // Certifique-se de que o caminho para os arquivos de rotas está correto
+  apis: ['./src/routes/*.ts'],
 };
+
+
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
 

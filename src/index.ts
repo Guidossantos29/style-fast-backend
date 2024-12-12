@@ -29,7 +29,8 @@ app.use('/auth', authRoutes);
 app.use('/products', authenticate, productRoutes); 
 app.use('/cart', authenticate, cartRoutes); 
 
-// Inicia o servidor
+
+
 app.listen(PORT, () => {
   console.log(`Server online at http://localhost:${PORT}`);
 });

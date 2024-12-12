@@ -18,6 +18,8 @@ const router = express.Router();
  *   post:
  *     summary: Cria a new product
  *     tags: [Products]
+ *     security:
+ *       - bearerAuth: [] 
  *     requestBody:
  *       required: true
  *       content:
@@ -57,6 +59,8 @@ router.post('/', authenticate, async (req, res) => {
  * /products:
  *   get:
  *     summary: Return all produtos
+ *     security:
+ *       - bearerAuth: [] 
  *     tags: [Products]
  *     responses:
  *       200:
@@ -72,6 +76,8 @@ router.get('/', authenticate, (req, res) => productController.getAll(req, res));
  *   get:
  *     summary: Retorna a product for ID
  *     tags: [Products]
+ *       security:
+ *       - bearerAuth: [] 
  *     parameters:
  *       - in: path
  *         name: id
@@ -93,6 +99,8 @@ router.get('/:id', authenticate, (req, res) => productController.getById(req, re
  *   put:
  *     summary: update a product 
  *     tags: [Products]
+ *     security:
+ *       - bearerAuth: [] 
  *     parameters:
  *       - in: path
  *         name: id
@@ -136,6 +144,8 @@ router.put('/:id', authenticate, (req, res) => productController.update(req, res
  *   delete:
  *     summary: Delete a product
  *     tags: [Products]
+ *     security:
+ *       - bearerAuth: [] 
  *     parameters:
  *       - in: path
  *         name: id

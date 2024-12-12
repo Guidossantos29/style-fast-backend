@@ -33,7 +33,7 @@ router.post("/register", (req, res) => authController.register(req, res));
  * @swagger
  * /auth/login:
  *   post:
- *     summary: Logs in the user
+ *     summary: Login do usuário
  *     tags: [Auth]
  *     requestBody:
  *       required: true
@@ -44,14 +44,28 @@ router.post("/register", (req, res) => authController.register(req, res));
  *             properties:
  *               email:
  *                 type: string
+ *                 description: O email do usuário
+ *                 example: "usuario@example.com"
  *               password:
  *                 type: string
+ *                 description: A senha do usuário
+ *                 example: "senha123"
  *     responses:
  *       200:
  *         description: Login realizado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                   description: Token JWT gerado
+ *                   example: "eyJhbGciOiJIUzI1NiIsInR..."
  *       400:
  *         description: Credenciais inválidas
  */
-router.post("/login", (req, res) => authController.login(req, res)); 
+router.post("/login", (req, res) => authController.login(req, res));
+
 
 export default router;
