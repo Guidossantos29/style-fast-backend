@@ -16,7 +16,7 @@ const router = express.Router();
  * @swagger
  * /products:
  *   post:
- *     summary: Cria a new product
+ *     summary: Cria um novo produto
  *     tags: [Products]
  *     security:
  *       - bearerAuth: [] 
@@ -33,6 +33,8 @@ const router = express.Router();
  *                 type: string
  *               price:
  *                 type: number
+ *               stock:
+ *                 type: integer
  *               images:
  *                 type: array
  *                 items:
@@ -53,6 +55,7 @@ router.post('/', authenticate, async (req, res) => {
         res.status(500).json({ error: "Error creating product" });
     }
 });
+
 
 /**
  * @swagger

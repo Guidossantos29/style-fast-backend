@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import CartService from '../services/cartService';
-import CustomRequest from '../types/express/index'; 
+import CustomRequest from '../types/express/index';
 
 class CartController {
   cartService = new CartService();

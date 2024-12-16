@@ -1,5 +1,7 @@
 import express, { Request, Response } from 'express';
 import CartController from '../controllers/cartController';
+import { authenticate } from '../middleware/authMiddleware';
+import { cartAuthMiddleware } from '../middleware/authCartMiddleware';
 
 const router = express.Router();
 const cartController = new CartController();
@@ -61,7 +63,7 @@ const cartController = new CartController();
  *                   type: string
  *                   example: Error adding product to cart
  */
-router.post('/', async (req: Request, res: Response) => {
+router.post('/',cartAuthMiddleware,async (req: Request, res: Response) => {
   try {
     await cartController.addProductToCart(req, res);
   } catch (error) {
@@ -130,7 +132,7 @@ router.post('/', async (req: Request, res: Response) => {
  *                   type: string
  *                   example: Error retrieving cart
  */
-router.get('/', async (req: Request, res: Response) => {
+router.get('/', cartAuthMiddleware, async (req: Request, res: Response) => {
   try {
     await cartController.getCart(req, res);
   } catch (error) {
